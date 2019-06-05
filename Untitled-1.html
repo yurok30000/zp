@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <meta charset="uft-8" />
+        <title>Считаем зарплату</title>
+    <body>
+    
+        <script type="text/JavaScript">
+        alert ('Привет! Сейчас посчитаем твою зарплату. Но сначала ответь на несколько вопросов.')
+        var dol = prompt ('Если ты старший продавец-кассир, введи "спк", если продавец-консультант - "пк" (без кавычек)');
+        var okl;
+        if (dol == "спк") {
+            okl = 134.85
+        }
+        else if (dol == "пк") {
+            okl = 130.5
+        }
+        else {
+            alert ('Ты ввёл что-то не то!')
+        }
+        var chn;
+        var st = confirm ('Ты работаешь на полную ставку? (Если да, то нажми "ОК", если нет, нажми "Отмена"')
+        if (st == true) {
+          chn = 40  
+        }
+        else {
+            chn = prompt ('Сколько часов в неделю ты работаешь?')
+        }
+        var ned = prompt ('Сколько недель в этом коммерческом месяце?')
+        var poch = ned*chn*okl;
+        var pocho = parseFloat(poch.toFixed(0));
+        document.write('Твоя почасовка составляет ' +pocho + ' руб'+ "<br />")
+        var pl = prompt ('Какой план был в этом месяце?')
+        var vi = prompt ('Какую сумму выполнили?')
+        var vip = vi/pl;
+        var vipp = vip*100;
+        var vipo = parseFloat(vipp.toFixed(2));
+        document.write('Процент выполнения плана '+vipo + "<br />")
+        var gr;
+        if ( vip < 0.85) {
+            gr = 0.874
+        }
+        else if (vip < 0.9) {
+            gr = 1.075
+        }
+        else if (vip < 0.95) {
+            gr = 1.277
+        }
+        else if (vip < 1) {
+            gr = 1.478
+        }
+        else if (vip < 1.05) {
+            gr = 1.68
+        }
+        else if (vip < 1.1) {
+            gr = 1.882
+        }
+        else if (vip >= 1.1) {
+            gr = 2.083
+        }
+        document.write('Ваш грейд составляет ' +gr + "<br />")
+
+        var disa;
+        var x = confirm ('Если ты НЕ получал акты, за которые могут лишить Дисо А, нажми "ОК", если получал, нажми "Отмена"')
+        if (x == true) {
+            disa = poch * 0.15
+            document.write('Дисо А = ' + disa + ' руб' + "<br />")
+        }
+        else {
+            document.write('Из-за акта ты не получишь Дисо А' + "<br />")
+            disa = 0
+            document.write(disa + "<br />")
+        }
+        var disb;
+        if (gr > 1.3) {
+            disb = poch * 0.35 
+            document.write('Дисо Б = ' + disb + ' руб'+"<br />")
+        }
+        else{
+            disb = 0
+            document.write ('Сделали меньше 95-ти процентов плана, поэтому Дисо Б не будет' + "<br />")
+        }
+        var pr= vi/1.2/100*gr;
+        var pro = parseFloat(pr.toFixed(0));
+        document.write('Премия на магазин составляет ' + pro+ ' руб'+"<br />")
+        var rey = prompt ('Сколько процентов у тебя в рейтинге продавца?');
+        var psp = pr/100*rey;
+        var pspo = parseFloat(psp.toFixed(1));
+        document.write('Твоя премия с продаж составляет ' + pspo + ' руб'+"<br />");
+        var pom = confirm ('И последний вопрос, был ли ты на помощи в другом салоне? (Если да, то нажми "ОК", если нет, нажми "Отмена"')
+        var chp;
+        if (pom == true) {
+            chp = prompt ('Сколько рабочих часов ты был на помощи?') 
+            }
+        else    {
+            chp = 0
+        }
+        var dchp = chp * okl * 2;
+        var dchpo = parseFloat(dchp.toFixed(1));
+        if (dchp > 0 ) {
+         document.write('За работу в другом салоне ты дополнительно получаешь '+ dchpo+' руб'+ "<br />")   
+        }
+        
+        var zp = poch + disa +disb+ psp + dchp;
+        var zap = parseFloat(zp.toFixed(0));
+        alert ('Твоя зарплата вместе с авансом составляет ' + zap + ' руб');
+
+        </script>
+    </body>
+</html>
